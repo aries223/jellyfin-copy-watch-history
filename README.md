@@ -12,13 +12,13 @@ Where the script has been tested so far:
 |---|---|---|---|
 | Linux | Tested | 3.14 | Passes on test and real production server. |
 | macOS | Tested | 3.11 | Passes on test and real production server. |
-| Windows | Tested | 3.15 | Passes on real production server. Use `python` or `py` instead of `python3`. In `KEY_FILE`, plain backslashes are a syntax error: use forward slashes or a raw string (`r"C:\..."`). |
+| Windows | Tested | 3.15 | Passes on test and real production server.<br>Python is not installed by default on Windows 11, install from Microsoft Store (easiest) or python.org.<br>Use `python` or `py` instead of `python3`.<br>Use forward slashes or a raw string (`r"C:\..."`) in the `KEY_FILE` path. |
 
 The script uses only the Python standard library and f-strings, so it needs Python 3.6 or newer. Only the versions listed above have been tested.
 
 ## How To Use
 
-You need Python 3 (nothing to install) and a Jellyfin server you can reach from this computer. Tested with Jellyfin 12.2.0.
+You need Python 3 (no extra packages) and a Jellyfin server you can reach from this computer. Tested with Jellyfin 12.2.0.
 
 1. **Create an API key.** In the Jellyfin Dashboard (you need an admin account) open **API Keys**, click **+**, name it and copy the key.
 2. **Save the key** in a plain text file, just the key and nothing else, somewhere outside any git folder, for example `/path/to/apikey.txt`. Treat it like a password.
