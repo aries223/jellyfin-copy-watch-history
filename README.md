@@ -12,7 +12,7 @@ Where the script has been tested so far:
 |---|---|---|---|
 | Linux | Tested | 3.14 | Passes on test and real production server. |
 | macOS | Tested | 3.11 | Passes on test and real production server. |
-| Windows | Not yet tested | - | Use `python` or `py` instead of `python3`. In `KEY_FILE`, plain backslashes are a syntax error: use forward slashes or a raw string (`r"C:\..."`). |
+| Windows | Tested | 3.15 | Passes on real production server. Use `python` or `py` instead of `python3`. In `KEY_FILE`, plain backslashes are a syntax error: use forward slashes or a raw string (`r"C:\..."`). |
 
 The script uses only the Python standard library and f-strings, so it needs Python 3.6 or newer. Only the versions listed above have been tested.
 

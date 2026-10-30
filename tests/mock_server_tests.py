@@ -154,11 +154,12 @@ def run(args, key=KEY, server=None, src=SRC, dst=DST):
     key_file.write_text(key + "\n")
     text = SCRIPT.read_text()
     server = server or f"http://127.0.0.1:{PORT}"
-    text = re.sub(r'^SERVER = ".*"', f'SERVER = "{server}"', text, flags=re.M)
-    text = re.sub(r'^KEY_FILE = ".*"', f'KEY_FILE = "{key_file}"', text, flags=re.M)
-    text = re.sub(r'^SOURCE_USER_ID = ""', f'SOURCE_USER_ID = "{src}"', text, flags=re.M)
-    text = re.sub(r'^DEST_USER_ID = ""', f'DEST_USER_ID = "{dst}"', text, flags=re.M)
-    assert f'SERVER = "{server}"' in text and f'KEY_FILE = "{key_file}"' in text, "patch missed SERVER or KEY_FILE"
+    # !r writes a valid Python literal, and a function as the replacement stops re.sub reading Windows backslashes as escapes
+    text = re.sub(r'^SERVER = ".*"', lambda m: f"SERVER = {server!r}", text, flags=re.M)
+    text = re.sub(r'^KEY_FILE = ".*"', lambda m: f"KEY_FILE = {str(key_file)!r}", text, flags=re.M)
+    text = re.sub(r'^SOURCE_USER_ID = ""', lambda m: f"SOURCE_USER_ID = {src!r}", text, flags=re.M)
+    text = re.sub(r'^DEST_USER_ID = ""', lambda m: f"DEST_USER_ID = {dst!r}", text, flags=re.M)
+    assert f"SERVER = {server!r}" in text and f"KEY_FILE = {str(key_file)!r}" in text, "patch missed SERVER or KEY_FILE"
     copy = RUN / "script_copy.py"
     copy.write_text(text)
     r = subprocess.run([sys.executable, "-I", str(copy), *args], capture_output=True, text=True,
