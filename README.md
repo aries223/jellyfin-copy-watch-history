@@ -4,6 +4,18 @@ A small Python script that copies watch history from one Jellyfin user to anothe
 
 It copies played status, play counts, resume positions, last-played dates, favorites, likes and ratings, matching items by ID. Anything the destination user already has is skipped by default, so nothing is overwritten and running it twice is harmless.
 
+## Compatibility Matrix
+
+Where the script has been tested so far:
+
+| Platform | Status | Python tested | Notes |
+|---|---|---|---|
+| Linux | Tested | 3.14 | Passes the included test suite (`tests/mock_server_tests.py`). |
+| macOS | Not yet tested | - | - |
+| Windows | Not yet tested | - | Use `python` or `py` instead of `python3`. In `KEY_FILE`, plain backslashes are a syntax error: use forward slashes or a raw string (`r"C:\..."`). |
+
+The script uses only the Python standard library and f-strings, so it needs Python 3.6 or newer. Only the versions listed above have been tested.
+
 ## How To Use
 
 You need Python 3 (nothing to install) and a Jellyfin server you can reach from this computer. Tested with Jellyfin 12.2.0.
